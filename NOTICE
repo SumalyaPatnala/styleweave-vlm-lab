@@ -4,7 +4,8 @@ StyleWeave VLM Lab
 This repository contains original research code and documentation.
 Third-party datasets and pretrained models are **not** redistributed here.
 They must be obtained from their official sources and used under their own
-licenses. See `docs/phase0/04_DATASETS_AND_LICENSES.md`.
+licenses. See `docs/dataset_audit.md` and
+`docs/phase0/04_DATASETS_AND_LICENSES.md`.
 
 Isolation
 ---------
@@ -17,6 +18,6 @@ Third-party notices (to be used, not vendored, unless later added)
 - Hugging Face Transformers: Apache-2.0
 - Qwen3-VL-2B-Instruct weights: Apache-2.0 (model card, retrieved 2026-10-18)
 - FashionIQ: Community Data License Agreement (CDLA); variant not specified
-  on the official GitHub README
+  on the official GitHub README (issue #22 unanswered as of 2026-10-18)
 - Fashionpedia annotations/ontology: CC BY 4.0; images remain under original
   source terms (Flickr, Unsplash, Burst, Freestocks, Kaboompics, Pexels)

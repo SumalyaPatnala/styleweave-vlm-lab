@@ -2,9 +2,11 @@
 
 **Date of audit:** 2026-10-18
 **Machine:** MacBook Pro (Mac15,6), Apple M3 Pro, 18 GB unified memory
-**Repository:** `/Users/sumalyapatnala/styleweave-vlm-lab` (new, isolated)
+**Repository:** `/Users/sumalyapatnala/styleweave-vlm-lab` (isolated)
+**Remote:** https://github.com/SumalyaPatnala/styleweave-vlm-lab (`main`)
 **Isolation:** WorldSense-AI and portfolio repositories were inspected, not modified
 **Training status:** none
+**Canonical packet:** `docs/*.md`. Re-check log: `docs/phase0/07_REVERIFICATION.md`.
 
 ## Verdict
 
@@ -35,9 +37,10 @@ conditions.
 
 ## Binding constraints
 
-1. **Disk.** Data volume has 33 GB free and a 67 GB Hugging Face cache.
-   FashionIQ community image archive is ~989 MB compressed. Qwen3-VL-2B is
-   4.26 GB. Do not download unused models.
+1. **Disk.** Data volume has **32 Gi** free (re-check) and a 67 GB Hugging
+   Face cache with no CLIP or Qwen3-VL. FashionIQ community rar is
+   988,840,917 B. Qwen3-VL-2B is 4,255,140,312 B. Do not download unused
+   models.
 2. **Memory.** 18 GB unified, Metal 4, 14 GPU cores. The machine is already
    swapping. Close other apps before any VLM load.
 3. **Python.** System `python3` is 3.14.6. Project interpreter is Homebrew
@@ -48,6 +51,7 @@ conditions.
 
 ## What happens next (not started)
 
-Phase 1 will download official FashionIQ JSON splits, obtain images from a
-documented source, freeze CLIP, and emit JSON + Markdown evaluation
-artifacts. No training loop until that baseline is reproducible.
+Phase 1 (not started; needs approval) should run **B0**: frozen CLIP-B/32
+L2-sum on official FashionIQ val. Download official `captions/` +
+`image_splits/` first, then CLIP, then one documented image mirror after
+an ID dry-run. No Combiner training until that baseline is reproducible.

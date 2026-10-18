@@ -10,7 +10,7 @@ Phase 1 and require enough free disk.
 | Paper | Wu, Gao, Guo, Al-Halah, Rennie, Grauman, Feris. *Fashion IQ: A New Dataset Towards Retrieving Images by Natural Language Feedback*. CVPR 2021. https://arxiv.org/abs/1905.12794 |
 | Repo | https://github.com/XiaoxiaoGuo/fashion-iq |
 | License on official README | “Community Data License Agreement (CDLA) License” |
-| CDLA variant | **Not specified** (Permissive 1.0 vs Sharing 1.0). Treat as research-only until clarified. |
+| CDLA variant | **Not specified** (Permissive vs Sharing). Open [issue #22](https://github.com/XiaoxiaoGuo/fashion-iq/issues/22). Treat as research-only until clarified. |
 | Intended use | Public research benchmark; supplement says “free for academic use” |
 | Image origin | Product images sourced from a product-review dataset; metadata scraped from product pages |
 
@@ -33,7 +33,7 @@ report **validation** Recall@10 / Recall@50, per category and mean.
 
 | Artifact | Source | Size (audit) | Notes |
 | --- | --- | --- | --- |
-| Captions + image splits (JSON) | Official GitHub `json/` and `image_splits/` | Small (megabytes) | Prefer this over Kaggle copies |
+| Captions + image splits (JSON) | Official GitHub `captions/` and `image_splits/` (**not** `json/`) | **7,146,567 B** (GitHub Contents API, 2026-10-18) | Prefer this over Kaggle copies |
 | Attribute features | Official README “image attribute features” link | Not re-fetched | Optional for Phase 2 attribute stream |
 | Images | Official README image link has been **taken down** repeatedly | — | Community mirrors exist |
 
@@ -41,7 +41,7 @@ report **validation** Recall@10 / Recall@50, per category and mean.
 
 | Mirror | URL | Size | Risk |
 | --- | --- | --- | --- |
-| Hugging Face `Plachta/FashionIQ` | https://huggingface.co/datasets/Plachta/FashionIQ | **989 MB** `fashionIQ_dataset.rar` | Unofficial rehost; no dataset card |
+| Hugging Face `Plachta/FashionIQ` | https://huggingface.co/datasets/Plachta/FashionIQ | **988,840,917 B** `fashionIQ_dataset.rar` | Unofficial rehost; no dataset card |
 | CosMo.pytorch Google Drive (historical) | https://github.com/postBG/CosMo.pytorch | Unverified | Link marked temporary |
 | Yandex disk linked from official issue #18 | https://github.com/XiaoxiaoGuo/fashion-iq/issues/18 | Unverified | Reported incomplete / broken at times |
 | Kaggle `nguyenph/fashion-iq` | captions/splits only in the listing we saw | 7.36 MB listing | Not a substitute for images |

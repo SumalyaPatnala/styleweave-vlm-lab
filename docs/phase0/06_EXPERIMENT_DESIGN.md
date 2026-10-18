@@ -143,6 +143,14 @@ Allowed only after Phase 1 `metrics.json` exists and is produced by code.
 The UI must read those files. Hardcoded scores or canned explanations are
 bugs.
 
+## First executable experiment (not started)
+
+**B0:** frozen CLIP ViT-B/32 L2-sum on official FashionIQ val. Closest
+published analogue is CLIP4Cir Table 1 frozen sum (mean R@10/R@50
+19.70 / 38.26). Do not start M0/M1 or Qwen until B0 writes `metrics.json`.
+
+See canonical `docs/experiment_plan.md`.
+
 ## Reproducibility checklist
 
 - [ ] Python 3.12 venv only

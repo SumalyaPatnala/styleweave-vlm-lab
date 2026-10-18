@@ -6,7 +6,7 @@ Official documentation checked on 2026-10-18.
 
 - Card: https://huggingface.co/openai/clip-vit-base-patch32
 - Architecture: ViT-B/32 image encoder + Transformer text encoder, 512-d
-- Weights: ~605 MB
+- Weights: **605,247,071 B** (`pytorch_model.bin`, HF `x-linked-size` 2026-10-18)
 - HF memory utility (discussion #11): FP16 ~289 MB weights; FP32 ~577 MB
 - Transformers API: `CLIPModel`, `CLIPProcessor`
 - Apple Silicon: supported via PyTorch MPS after install
@@ -24,7 +24,7 @@ Official sources:
 - Model card: https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct
 - Code: https://github.com/QwenLM/Qwen3-VL
 - License: Apache-2.0
-- Weights: 2B params, BF16, `model.safetensors` **4.26 GB**
+- Weights: 2,127,532,032 BF16 params, `model.safetensors` **4,255,140,312 B**
 - Transformers class: `Qwen3VLForConditionalGeneration`
 - Card install note (historical): `transformers>=4.57` / install from source
   when 4.57 was unreleased. PyPI now has 4.57.6 and 5.x.
@@ -81,12 +81,12 @@ This is the only training experiment that is clearly in-scope on 18 GB.
 
 | Item | Approx. bytes | When |
 | --- | --- | --- |
-| CLIP-B/32 | 0.6 GB | Phase 1 |
-| FashionIQ images (community rar) | 0.99 GB compressed; more unzipped | Phase 1 |
-| Qwen3-VL-2B | 4.26 GB | Phase 3 |
-| Fashionpedia train images | 3.34 GB | Deferred |
-| Fashionpedia val/test images | 0.23 GB | Optional Phase 4 |
-| Free now | 33 GB | Tight if caches grow |
+| CLIP-B/32 | 605,247,071 B | Phase 1 |
+| FashionIQ images (community rar) | 988,840,917 B compressed; unzipped **unverified** | Phase 1 |
+| Qwen3-VL-2B | 4,255,140,312 B | Phase 3 (deferred; over 5 GB cap) |
+| Fashionpedia train images | 3,344,364,592 B | Deferred |
+| Fashionpedia val/test images | 236,499,034 B | Optional Phase 4 |
+| Free now | **32 Gi** | Tight if caches grow |
 
 Do not download Qwen or Fashionpedia until Phase 1 embeddings and eval
 artifacts exist and disk is re-checked.

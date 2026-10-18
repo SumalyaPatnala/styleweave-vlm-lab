@@ -35,7 +35,7 @@ the OS and browser**, not as dedicated VRAM.
 
 | Mount | Size | Used | Free | Notes |
 | --- | --- | --- | --- | --- |
-| `/System/Volumes/Data` | 460 Gi | 383 Gi | **33 Gi** | 93% full |
+| `/System/Volumes/Data` | 460 Gi | 383 Gi | **32 Gi** (re-check; was ~33 Gi earlier the same day) | 93% full |
 
 Large existing caches (not deleted; approval required):
 
@@ -77,5 +77,6 @@ Available on PyPI at audit time (not installed):
 - No dataset download
 - No model weight download
 - No training
-- No git remote, push, or deploy
+- Git remote now exists (`origin` → GitHub `styleweave-vlm-lab`); first
+  audit recorded “no remote.” Do not create a second repo.
 - No deletion of the 67 GB Hugging Face cache

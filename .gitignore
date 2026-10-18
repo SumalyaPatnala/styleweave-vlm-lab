@@ -26,13 +26,23 @@ data/cache/
 artifacts/
 runs/
 checkpoints/
+outputs/
+logs/
+tmp/
+temp/
+wandb/
+lightning_logs/
 *.pt
 *.pth
 *.bin
 *.safetensors
 *.gguf
+*.ckpt
+*.onnx
 *.rar
 *.zip
+*.tmp
+*.log
 
 # Hugging Face / Torch caches if ever pointed inside the repo
 .hf_home/

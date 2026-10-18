@@ -66,13 +66,14 @@ embedding backbone. Do not describe Phase 3 as CoLLM.
 
 - **CIRCO** (used widely for ZS-CIR). Multiple annotated positives; mAP.
 - **CoLLM refined benchmarks.** Reliability fixes on CIRR / FashionIQ.
-- **PinPoint** (arxiv:2603.04598). 7,635 queries, explicit hard negatives,
-  six paraphrases per query, multi-image queries. Reports ~25% paraphrase
-  variance and residual hard-negative retrieval.
-- **WISER** (Wang et al., CVPR 2026; arxiv:2602.23029). Training-free
-  retrieve–verify–refine. A VLM (paper uses Qwen2.5-VL-7B) scores whether a
-  candidate matches “instruction applied to reference.” Adaptive T2I / I2I
-  fusion. Code: https://github.com/Physicsmile/WISER
+- **PinPoint** (Mahadev, Yuan, Poirson, Xue, Wu, Kislyuk; CVPR 2026;
+  arxiv:2603.04598). 7,635 queries, explicit hard negatives, six paraphrases
+  per query, multi-image queries. Reports ~25% paraphrase variance and
+  residual hard-negative retrieval.
+- **WISER** (Wang, Qu, Yang, Hao, Xu, Guo, Wang; CVPR 2026;
+  arxiv:2602.23029). Training-free retrieve–verify–refine. Dual-path
+  T2I/I2I plus a VLM verifier of “instruction applied to reference.”
+  Code: https://github.com/Physicsmile/WISER
 
 **Relation:** Phase 4’s constraint checks and explanation-faithfulness tests
 are in this evaluation family. WISER already does VLM verification of CIR

@@ -13,9 +13,17 @@ data:
   name: fashion-iq
   splits: official
   report_split: val
+  captions_dir: data/raw/fashion-iq/captions
+  image_splits_dir: data/raw/fashion-iq/image_splits
+  images_dir: data/raw/fashion-iq/images
   categories: [dress, shirt, toptee]
   allow_missing_gallery_frac: 0.01
   fail_on_missing_target: true
+literature_orientation:
+  source: CLIP4Cir Table 1 frozen sum (Baldrati et al. 2023)
+  mean_recall_at_10: 19.70
+  mean_recall_at_50: 38.26
+  note: Published numbers for orientation only. Do not copy into metrics.json.
 metrics: [recall@10, recall@50]
 artifacts:
   json: artifacts/phase1_frozen_clip/metrics.json
