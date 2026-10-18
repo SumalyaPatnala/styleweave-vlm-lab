@@ -1,20 +1,21 @@
-# Phase 0 pin list. Do not install training extras until Phase 1.
 # Interpreter: Python 3.12 (repo .venv). Do not use system Python 3.14.
+# Kaggle already has torch; prefer running B0 there.
 
-# Phase 1 — frozen retrieval baseline (install then)
+numpy>=1.26
+pyyaml>=6.0
+
+# Phase 1 encoding (install locally only after a disk check; skip if using Kaggle)
 # torch>=2.6,<2.15
 # torchvision
-# transformers>=4.57
+# transformers>=4.40
 # pillow
-# numpy
-# pyyaml
-# pytest
+# huggingface_hub
 
-# Phase 2 — trainable fusion
+# Phase 2 — trainable fusion (not B0)
 # tqdm
 # tensorboard
 
-# Phase 3 — generative VLM (only if disk and memory allow)
+# Phase 3 — generative VLM (blocked until B0 passes)
 # peft
 # accelerate
 # # flash-attn is CUDA-only and is NOT supported on Apple MPS

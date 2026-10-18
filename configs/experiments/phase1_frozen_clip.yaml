@@ -1,13 +1,15 @@
-# Planned Phase 1 config. Not executed in Phase 0.
+# Phase 1 B0. Not executed until coverage passes on real images.
 experiment_id: phase1_frozen_clip
-status: planned
+status: ready
 seed: 42
-device_preference: [mps, cpu]
+device_preference: [cuda, mps, cpu]
 model:
   name: openai/clip-vit-base-patch32
+  revision: 3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268
   frozen: true
 query:
   primary: l2_sum   # normalize(img) + normalize(text), then normalize
+  caption_mode: clip4cir_concat
   controls: [image_only, text_only]
 data:
   name: fashion-iq
@@ -19,6 +21,16 @@ data:
   categories: [dress, shirt, toptee]
   allow_missing_gallery_frac: 0.01
   fail_on_missing_target: true
+runtime:
+  batch_size: 32
+  allow_download: false
+  min_free_gib: 25
+hub:
+  enabled: false
+  require_env: STYLEWEAVE_HF_PUBLISH
+  repo_id: ""
+  private: true
+  allow_images: false
 literature_orientation:
   source: CLIP4Cir Table 1 frozen sum (Baldrati et al. 2023)
   mean_recall_at_10: 19.70
@@ -26,8 +38,9 @@ literature_orientation:
   note: Published numbers for orientation only. Do not copy into metrics.json.
 metrics: [recall@10, recall@50]
 artifacts:
+  dir: artifacts/phase1_frozen_clip
   json: artifacts/phase1_frozen_clip/metrics.json
   markdown: artifacts/phase1_frozen_clip/report.md
 notes: >
-  Do not write metrics files until an evaluation script produces them
-  from real images and official labels.
+  Prefer Kaggle T4 for the CLIP+image run. Do not upload FashionIQ images.
+  Hugging Face publishing stays off until STYLEWEAVE_HF_PUBLISH=1 and --publish-hub.

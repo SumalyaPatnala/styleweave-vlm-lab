@@ -13,3 +13,13 @@ data/cache/clip_embeddings/
 ```
 
 There is no official `json/` directory. Use `captions/` + `image_splits/`.
+
+Fetch official text only:
+
+```
+python scripts/fetch_fashioniq_text.py
+```
+
+Do not commit images. Do not upload FashionIQ images to Kaggle or Hugging Face.
+On Kaggle, attach an existing dataset and pass `--data-root` / `--images-source`.
+See `docs/phase1_execution.md`.

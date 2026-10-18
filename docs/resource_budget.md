@@ -17,7 +17,9 @@ Hard limits for this machine:
 | Free disk | **32 Gi** | Must stay ≥25 Gi |
 | Global HF cache | 67 GB | **No** — do not delete; also **no CLIP/Qwen** to reuse |
 
-Phase 0 added **markdown only**. No torch, no CLIP, no FashionIQ images.
+Phase 0 added **markdown only**. Phase 1 adds a portable runner. **Do not
+install torch on this Mac for B0** unless you re-check disk; Kaggle is the
+safer CLIP+image host. No FashionIQ images in git.
 
 ## Future download estimates (approval required)
 

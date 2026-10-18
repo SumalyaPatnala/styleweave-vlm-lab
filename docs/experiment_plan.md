@@ -116,7 +116,9 @@ Blocked until B0 `metrics.json` exists. No hardcoded scores.
 
 | Condition | Action |
 | --- | --- |
-| Phase 0 (this packet) | Documentation complete. Phase 1 still requires explicit approval. |
+| Phase 0 (this packet) | Documentation complete. |
+| Phase 1 B0 runner | Implemented. Prefer Kaggle T4. Local MPS is the disk-risk fallback. |
+| Phase 1 B0 metrics.json | Written only by `styleweave.eval.b0` after coverage passes. |
 | Disk would fall below 25 GB free | Do not download |
 | Image mirror missing >1% val IDs | Stop; do not train |
 | Qwen dry-load RSS > ~14 GB | Skip Track B weights |

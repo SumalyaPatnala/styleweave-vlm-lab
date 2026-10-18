@@ -28,6 +28,8 @@ REQUIRED_DOCS = [
     "docs/citations.bib",
     "configs/experiments/phase1_frozen_clip.yaml",
     "configs/experiments/phase2_combiner.yaml",
+    "docs/phase1_execution.md",
+    "notebooks/kaggle_phase1_b0.ipynb",
 ]
 
 
@@ -48,13 +50,10 @@ class Phase0DocsTests(unittest.TestCase):
         artifacts = ROOT / "artifacts"
         if not artifacts.exists():
             return
-        metric_files = list(artifacts.rglob("metrics.json"))
-        self.assertEqual(
-            metric_files,
-            [],
-            "metrics.json must be created by an evaluation run, not Phase 0: "
-            f"{metric_files}",
-        )
+        for path in artifacts.rglob("metrics.json"):
+            payload = path.read_text()
+            self.assertIn("styleweave.eval.b0", payload)
+            self.assertIn("produced_by", payload)
 
     def test_phase0_docs_forbid_novelty_claim(self) -> None:
         text = (ROOT / "docs/phase0/03_NOVELTY_ASSESSMENT.md").read_text()
@@ -99,6 +98,7 @@ class Phase0DocsTests(unittest.TestCase):
         self.assertIn("Do not create a second repository", text)
         self.assertIn("Phase 0 documentation is complete", text)
         self.assertIn("No model training", text)
+        self.assertIn("docs/phase1_execution.md", text)
 
 
 if __name__ == "__main__":

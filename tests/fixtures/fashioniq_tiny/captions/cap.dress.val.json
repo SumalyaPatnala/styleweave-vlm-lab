@@ -1,0 +1,12 @@
+[
+  {
+    "target": "IMG_B",
+    "candidate": "IMG_A",
+    "captions": ["is shinier", "has shorter sleeves"]
+  },
+  {
+    "target": "IMG_D",
+    "candidate": "IMG_C",
+    "captions": ["is darker", "more casual"]
+  }
+]

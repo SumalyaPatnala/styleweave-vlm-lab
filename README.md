@@ -10,17 +10,18 @@ Do not create a second repository.
 
 ## Current status
 
-**Phase 0 documentation is complete. No model training. No checkpoint or
-dataset downloads. No metrics.**
+**Phase 0 documentation is complete. No model training.** Phase 1 B0 code is
+in-repo; CLIP and FashionIQ **image** downloads are still gated. No metrics
+until `styleweave.eval.b0` writes them.
 
-First reproducible baseline after approval: **B0** — frozen CLIP ViT-B/32
-L2-sum on official FashionIQ **val**. See
-[docs/experiment_plan.md](docs/experiment_plan.md).
+Safer B0 path on this Mac: **Kaggle free GPU T4**, not local MPS. See
+[docs/phase1_execution.md](docs/phase1_execution.md). Do not push until
+approved.
 
 | Phase | Status | Gate |
 | --- | --- | --- |
 | 0 Environment and literature audit | Complete (docs) | Review this packet before Phase 1 |
-| 1 Frozen CLIP baseline on FashionIQ | Not started | Approval + disk re-check (≥25 Gi free after peak) |
+| 1 Frozen CLIP baseline on FashionIQ | Runner ready; full eval not run | Kaggle T4 preferred; coverage must pass before metrics.json |
 | 2 Trainable fusion + contrastive training | Not started | Reproducible B0 |
 | 3 Qwen3-VL-2B generative / tool-use | Deferred | Exceeds 5 GB cap unless re-approved |
 | 4 Counterfactual + ablation evaluation | Not started | Train / val isolation |
@@ -38,6 +39,8 @@ L2-sum on official FashionIQ **val**. See
 
 Supporting notes from the first audit live under `docs/phase0/`.
 Re-verification log: [docs/phase0/07_REVERIFICATION.md](docs/phase0/07_REVERIFICATION.md).
+Phase 1 runner: [docs/phase1_execution.md](docs/phase1_execution.md).
+Kaggle notebook: [notebooks/kaggle_phase1_b0.ipynb](notebooks/kaggle_phase1_b0.ipynb).
 
 ## Repository path
 
@@ -45,7 +48,7 @@ Re-verification log: [docs/phase0/07_REVERIFICATION.md](docs/phase0/07_REVERIFIC
 /Users/sumalyapatnala/styleweave-vlm-lab
 ```
 
-Python 3.12 virtualenv (created, packages not installed):
+Python 3.12 virtualenv (numpy/PyYAML for tests; torch not installed locally):
 
 ```
 /Users/sumalyapatnala/styleweave-vlm-lab/.venv/bin/python

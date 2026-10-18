@@ -1,10 +1,27 @@
 [project]
 name = "styleweave-vlm-lab"
-version = "0.1.0"
+version = "0.2.0"
 description = "Local research lab for compositional fashion retrieval"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.10"
 readme = "README.md"
 license = { text = "MIT" }
+
+[project.optional-dependencies]
+phase1 = [
+    "torch>=2.2",
+    "transformers>=4.40",
+    "pillow",
+    "numpy",
+    "pyyaml",
+    "huggingface_hub",
+]
+dev = [
+    "numpy",
+    "pyyaml",
+]
+
+[project.scripts]
+styleweave-b0 = "styleweave.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
