@@ -9,7 +9,7 @@ license = { text = "MIT" }
 [project.optional-dependencies]
 phase1 = [
     "torch>=2.2",
-    "transformers>=4.40",
+    "transformers>=4.41,<5.3",
     "pillow",
     "numpy",
     "pyyaml",

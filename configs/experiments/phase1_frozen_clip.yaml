@@ -19,8 +19,11 @@ data:
   image_splits_dir: data/raw/fashion-iq/image_splits
   images_dir: data/raw/fashion-iq/images
   categories: [dress, shirt, toptee]
-  allow_missing_gallery_frac: 0.01
+  allow_missing_gallery_frac: 0.0
   fail_on_missing_target: true
+  fail_on_missing_reference: true
+  require_complete_gallery: true
+  incomplete_gallery_justification: ""
 runtime:
   batch_size: 32
   allow_download: false

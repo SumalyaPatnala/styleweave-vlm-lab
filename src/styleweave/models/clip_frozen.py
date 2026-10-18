@@ -7,7 +7,7 @@ from typing import Sequence
 
 import numpy as np
 
-from styleweave.hardware import assert_free_disk
+from styleweave.preflight import check_disk_budget, detect_runtime
 
 
 class FrozenCLIP:
@@ -21,6 +21,7 @@ class FrozenCLIP:
         min_free_gib: float,
         cache_dir: str | None = None,
         frozen: bool = True,
+        skip_disk_check: bool = False,
     ) -> None:
         if not frozen:
             raise ValueError("Phase 1 B0 requires frozen=True")
@@ -33,8 +34,14 @@ class FrozenCLIP:
                 "Install Phase 1 extras, or run on Kaggle where they are present."
             ) from exc
 
-        if allow_download:
-            assert_free_disk(min_free_gib)
+        if allow_download and not skip_disk_check:
+            check_disk_budget(
+                runtime=detect_runtime(),
+                cache_dir=cache_dir,
+                allow_download=True,
+                model_name=model_name,
+                mac_min_free_gib=min_free_gib,
+            )
 
         kwargs: dict = {
             "revision": revision,

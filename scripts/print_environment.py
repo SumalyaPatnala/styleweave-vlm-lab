@@ -3,27 +3,29 @@
 
 from __future__ import annotations
 
-import platform
-import shutil
+import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from styleweave.preflight import (  # noqa: E402
+    PreflightError,
+    check_disk_budget,
+    collect_environment,
+    detect_runtime,
+)
+
 
 def main() -> None:
-    free_gb = shutil.disk_usage("/").free / (1024**3)
-    print(f"python={sys.version.split()[0]}")
-    print(f"executable={sys.executable}")
-    print(f"platform={platform.platform()}")
-    print(f"machine={platform.machine()}")
-    print(f"disk_free_gb={free_gb:.1f}")
-    print(f"repo={Path(__file__).resolve().parents[1]}")
+    print(f"runtime={detect_runtime()}")
+    print(f"repo={ROOT}")
+    print(json.dumps(collect_environment(), indent=2))
     try:
-        import torch
-
-        print(f"torch={torch.__version__}")
-        print(f"mps_available={torch.backends.mps.is_available()}")
-    except ImportError:
-        print("torch=not_installed")
+        print(json.dumps(check_disk_budget(allow_download=False), indent=2))
+    except PreflightError as exc:
+        print(f"disk_preflight={exc}")
 
 
 if __name__ == "__main__":

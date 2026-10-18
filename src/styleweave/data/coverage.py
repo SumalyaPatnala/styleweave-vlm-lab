@@ -37,9 +37,12 @@ class CoverageReport:
     n_missing_gallery: int
     n_missing_targets: int
     n_missing_references: int
+    n_targets_not_in_gallery: int
     missing_gallery_frac: float
     missing_target_ids: list[str] = field(default_factory=list)
+    missing_reference_ids: list[str] = field(default_factory=list)
     missing_gallery_ids: list[str] = field(default_factory=list)
+    targets_not_in_gallery: list[str] = field(default_factory=list)
     caption_sha256: str = ""
     split_sha256: str = ""
     ok: bool = False
@@ -54,9 +57,12 @@ class CoverageReport:
             "n_missing_gallery": self.n_missing_gallery,
             "n_missing_targets": self.n_missing_targets,
             "n_missing_references": self.n_missing_references,
+            "n_targets_not_in_gallery": self.n_targets_not_in_gallery,
             "missing_gallery_frac": self.missing_gallery_frac,
             "missing_target_ids": self.missing_target_ids[:50],
+            "missing_reference_ids": self.missing_reference_ids[:50],
             "missing_gallery_ids": self.missing_gallery_ids[:50],
+            "targets_not_in_gallery": self.targets_not_in_gallery[:50],
             "caption_sha256": self.caption_sha256,
             "split_sha256": self.split_sha256,
             "ok": self.ok,
@@ -74,6 +80,9 @@ def check_category_coverage(
     caption_mode: str,
     allow_missing_gallery_frac: float,
     fail_on_missing_target: bool,
+    fail_on_missing_reference: bool = True,
+    require_complete_gallery: bool = True,
+    incomplete_gallery_justification: str = "",
 ) -> tuple[CoverageReport, list[str], list[FashionIQQuery]]:
     from styleweave.data.fashioniq import caption_path, split_path
 
@@ -88,7 +97,9 @@ def check_category_coverage(
     queries = load_queries(captions_dir, category, split, caption_mode=caption_mode)
     gallery_set = set(gallery_ids)
 
-    missing_gallery = [image_id for image_id in gallery_ids if resolve_image(images_dir, image_id) is None]
+    missing_gallery = [
+        image_id for image_id in gallery_ids if resolve_image(images_dir, image_id) is None
+    ]
     missing_targets = sorted(
         {
             query.target_id
@@ -96,8 +107,15 @@ def check_category_coverage(
             if resolve_image(images_dir, query.target_id) is None
         }
     )
-    missing_refs = sum(
-        1 for query in queries if resolve_image(images_dir, query.reference_id) is None
+    missing_refs = sorted(
+        {
+            query.reference_id
+            for query in queries
+            if resolve_image(images_dir, query.reference_id) is None
+        }
+    )
+    targets_not_in_gallery = sorted(
+        {query.target_id for query in queries if query.target_id not in gallery_set}
     )
     frac = (len(missing_gallery) / len(gallery_ids)) if gallery_ids else 1.0
 
@@ -108,10 +126,13 @@ def check_category_coverage(
         n_queries=len(queries),
         n_missing_gallery=len(missing_gallery),
         n_missing_targets=len(missing_targets),
-        n_missing_references=missing_refs,
+        n_missing_references=len(missing_refs),
+        n_targets_not_in_gallery=len(targets_not_in_gallery),
         missing_gallery_frac=frac,
         missing_target_ids=missing_targets,
+        missing_reference_ids=missing_refs,
         missing_gallery_ids=missing_gallery,
+        targets_not_in_gallery=targets_not_in_gallery,
         caption_sha256=sha256_file(cap_file),
         split_sha256=sha256_file(split_file),
         ok=True,
@@ -119,13 +140,40 @@ def check_category_coverage(
     if fail_on_missing_target and missing_targets:
         report.ok = False
         report.errors.append(
-            f"{category}: {len(missing_targets)} missing val targets (fail_on_missing_target)"
+            f"{category}: {len(missing_targets)} missing val target files"
         )
-    if frac > allow_missing_gallery_frac:
+    if fail_on_missing_reference and missing_refs:
         report.ok = False
         report.errors.append(
-            f"{category}: missing gallery fraction {frac:.4f} > {allow_missing_gallery_frac}"
+            f"{category}: {len(missing_refs)} missing val reference files"
         )
+    if targets_not_in_gallery:
+        report.ok = False
+        report.errors.append(
+            f"{category}: {len(targets_not_in_gallery)} targets are not in the val gallery split"
+        )
+    if missing_gallery:
+        if require_complete_gallery:
+            report.ok = False
+            report.errors.append(
+                f"{category}: gallery missing {len(missing_gallery)} / {len(gallery_ids)} "
+                "images; B0 requires complete gallery coverage"
+            )
+        elif not incomplete_gallery_justification.strip():
+            report.ok = False
+            report.errors.append(
+                f"{category}: incomplete gallery requires a documented research justification"
+            )
+        elif frac > allow_missing_gallery_frac:
+            report.ok = False
+            report.errors.append(
+                f"{category}: missing gallery fraction {frac:.4f} > {allow_missing_gallery_frac}"
+            )
+        else:
+            report.errors.append(
+                f"{category}: incomplete gallery allowed by justification "
+                f"({frac:.4f} missing; {incomplete_gallery_justification[:120]})"
+            )
     if not gallery_ids:
         report.ok = False
         report.errors.append(f"{category}: empty gallery split")

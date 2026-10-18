@@ -10,6 +10,7 @@ from pathlib import Path
 from styleweave.config import B0Config, ROOT, load_b0_config
 from styleweave.data.fashioniq import discover_fashioniq_layout
 from styleweave.eval.b0 import CoverageError, run_b0
+from styleweave.preflight import PreflightError
 from styleweave.hub.publish import PublishDisabled, PublishRefused, publish_eval_artifacts
 
 
@@ -75,6 +76,9 @@ def main(argv: list[str] | None = None) -> int:
     except CoverageError as exc:
         print(f"COVERAGE FAILED: {exc}", file=sys.stderr)
         return 2
+    except PreflightError as exc:
+        print(f"PREFLIGHT FAILED: {exc}", file=sys.stderr)
+        return 4
     except RuntimeError as exc:
         print(f"RUN FAILED: {exc}", file=sys.stderr)
         return 1

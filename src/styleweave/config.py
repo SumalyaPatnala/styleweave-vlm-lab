@@ -42,8 +42,11 @@ class B0Config:
     captions_dir: str = "data/raw/fashion-iq/captions"
     image_splits_dir: str = "data/raw/fashion-iq/image_splits"
     images_dir: str = "data/raw/fashion-iq/images"
-    allow_missing_gallery_frac: float = 0.01
+    allow_missing_gallery_frac: float = 0.0
     fail_on_missing_target: bool = True
+    fail_on_missing_reference: bool = True
+    require_complete_gallery: bool = True
+    incomplete_gallery_justification: str = ""
     batch_size: int = 32
     max_text_length: int = 77
     artifacts_dir: str = "artifacts/phase1_frozen_clip"
@@ -104,6 +107,15 @@ def load_b0_config(path: Path | None = None, root: Path | None = None) -> B0Conf
         )
         cfg.fail_on_missing_target = bool(
             data.get("fail_on_missing_target", cfg.fail_on_missing_target)
+        )
+        cfg.fail_on_missing_reference = bool(
+            data.get("fail_on_missing_reference", cfg.fail_on_missing_reference)
+        )
+        cfg.require_complete_gallery = bool(
+            data.get("require_complete_gallery", cfg.require_complete_gallery)
+        )
+        cfg.incomplete_gallery_justification = str(
+            data.get("incomplete_gallery_justification", cfg.incomplete_gallery_justification)
         )
         runtime = raw.get("runtime", {})
         cfg.batch_size = int(runtime.get("batch_size", cfg.batch_size))

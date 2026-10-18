@@ -7,7 +7,7 @@ pyyaml>=6.0
 # Phase 1 encoding (install locally only after a disk check; skip if using Kaggle)
 # torch>=2.6,<2.15
 # torchvision
-# transformers>=4.40
+# transformers>=4.41,<5.3
 # pillow
 # huggingface_hub
 
