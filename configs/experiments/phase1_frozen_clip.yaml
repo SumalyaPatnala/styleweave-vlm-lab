@@ -1,0 +1,25 @@
+# Planned Phase 1 config. Not executed in Phase 0.
+experiment_id: phase1_frozen_clip
+status: planned
+seed: 42
+device_preference: [mps, cpu]
+model:
+  name: openai/clip-vit-base-patch32
+  frozen: true
+query:
+  primary: l2_sum   # normalize(img) + normalize(text), then normalize
+  controls: [image_only, text_only]
+data:
+  name: fashion-iq
+  splits: official
+  report_split: val
+  categories: [dress, shirt, toptee]
+  allow_missing_gallery_frac: 0.01
+  fail_on_missing_target: true
+metrics: [recall@10, recall@50]
+artifacts:
+  json: artifacts/phase1_frozen_clip/metrics.json
+  markdown: artifacts/phase1_frozen_clip/report.md
+notes: >
+  Do not write metrics files until an evaluation script produces them
+  from real images and official labels.

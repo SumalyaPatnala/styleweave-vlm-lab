@@ -1,0 +1,29 @@
+# Planned Phase 2 config. Not executed in Phase 0.
+experiment_id: phase2_attribute_combiner
+status: planned
+seeds: [13, 21, 42]
+device_preference: [mps, cpu]
+encoder:
+  name: openai/clip-vit-base-patch32
+  frozen: true
+  precompute_embeddings: true
+fusion:
+  name: AttributeCombiner
+  hidden_size: 512
+  use_attributes: true
+train:
+  objective: infonce
+  temperature: 0.07
+  batch_size: 64
+  max_epochs: 20
+  early_stop_metric: val_recall@10
+eval:
+  identical_to: phase1_frozen_clip
+ablations: [B0, B1, B2, M0, M1]
+must_log:
+  - trainable_parameter_count
+  - loss_curve
+  - seed
+  - split_hash
+  - hardware
+  - wall_time_sec

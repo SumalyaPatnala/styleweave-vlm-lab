@@ -1,0 +1,11 @@
+[project]
+name = "styleweave-vlm-lab"
+version = "0.1.0"
+description = "Local research lab for compositional fashion retrieval"
+requires-python = ">=3.12,<3.13"
+readme = "README.md"
+license = { text = "MIT" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

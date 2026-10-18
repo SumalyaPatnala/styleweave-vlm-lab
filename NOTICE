@@ -1,0 +1,22 @@
+StyleWeave VLM Lab
+==================
+
+This repository contains original research code and documentation.
+Third-party datasets and pretrained models are **not** redistributed here.
+They must be obtained from their official sources and used under their own
+licenses. See `docs/phase0/04_DATASETS_AND_LICENSES.md`.
+
+Isolation
+---------
+This project is a standalone Git repository. It is not part of WorldSense-AI
+and is not part of any personal portfolio repository.
+
+Third-party notices (to be used, not vendored, unless later added)
+------------------------------------------------------------------
+- OpenAI CLIP (code): MIT. https://github.com/openai/CLIP
+- Hugging Face Transformers: Apache-2.0
+- Qwen3-VL-2B-Instruct weights: Apache-2.0 (model card, retrieved 2026-10-18)
+- FashionIQ: Community Data License Agreement (CDLA); variant not specified
+  on the official GitHub README
+- Fashionpedia annotations/ontology: CC BY 4.0; images remain under original
+  source terms (Flickr, Unsplash, Burst, Freestocks, Kaboompics, Pexels)

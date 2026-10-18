@@ -1,0 +1,50 @@
+# Local environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Secrets and local overrides
+.env
+.env.*
+!.env.example
+
+# Data and model weights (downloaded, not committed)
+data/raw/
+data/processed/
+data/images/
+data/cache/
+artifacts/
+runs/
+checkpoints/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.gguf
+*.rar
+*.zip
+
+# Hugging Face / Torch caches if ever pointed inside the repo
+.hf_home/
+.cache/
+
+# Frontend (Phase 5, later)
+node_modules/
+.next/
+out/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp

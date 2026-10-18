@@ -1,0 +1,20 @@
+# Phase 0 pin list. Do not install training extras until Phase 1.
+# Interpreter: Python 3.12 (repo .venv). Do not use system Python 3.14.
+
+# Phase 1 — frozen retrieval baseline (install then)
+# torch>=2.6,<2.15
+# torchvision
+# transformers>=4.57
+# pillow
+# numpy
+# pyyaml
+# pytest
+
+# Phase 2 — trainable fusion
+# tqdm
+# tensorboard
+
+# Phase 3 — generative VLM (only if disk and memory allow)
+# peft
+# accelerate
+# # flash-attn is CUDA-only and is NOT supported on Apple MPS
